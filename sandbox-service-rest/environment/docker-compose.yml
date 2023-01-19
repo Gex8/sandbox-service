@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  mongodb:
+    image: ${MONGO_IMAGE}
+    hostname: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mdbUser
+      MONGO_INITDB_ROOT_PASSWORD: mdbPassword
+    ports:
+      - ${MONGODB_EXT_PORT}:${MONGODB_INT_PORT}

@@ -1,0 +1,302 @@
+openapi: 3.0.0
+info:
+  description: Sandbox-service ExampleData Rest API descriptor
+  version: 1.0.0
+  title: Sandbox-service ExampleData API
+servers:
+  - url: https://localhost:8080/sandboxService/exampleData
+paths:
+  /exampleData:
+    get:
+      tags:
+        - ExampleData
+      description: |
+        Get ExampleData by parameter values.
+      operationId: getExampleData
+      parameters:
+        - name: x-correlation-id
+          in: header
+          required: true
+          schema:
+            type: string
+          example: example-corr-id
+      responses:
+        200:
+          description: OK
+          content:
+            application/stream+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ExampleData"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      deprecated: false
+    post:
+      tags:
+        - ExampleData
+      description: |
+        Create ExampleData.
+      operationId: createExampleData
+      parameters:
+        - name: x-correlation-id
+          in: header
+          required: true
+          schema:
+            type: string
+          example: example-corr-id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExampleData"
+      responses:
+        200:
+          description: OK
+          content:
+            application/stream+json:
+              schema:
+                $ref: "#/components/schemas/ExampleData"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      deprecated: false
+  /exampleData/{id}:
+    get:
+      tags:
+        - ExampleData
+      description: |
+        Get ExampleData info by id.
+      operationId: getExampleDataById
+      parameters:
+        - name: x-correlation-id
+          in: header
+          required: true
+          schema:
+            type: string
+          example: example-corr-id
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: id-01
+      responses:
+        200:
+          description: OK
+          content:
+            application/stream+json:
+              schema:
+                $ref: "#/components/schemas/ExampleData"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      deprecated: false
+    put:
+      tags:
+        - ExampleData
+      description: |
+        Upsert ExampleData.
+      operationId: upsertExampleDataById
+      parameters:
+        - name: x-correlation-id
+          in: header
+          required: true
+          schema:
+            type: string
+          example: example-corr-id
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: id-01
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExampleData"
+      responses:
+        200:
+          description: OK
+          content:
+            application/stream+json:
+              schema:
+                $ref: "#/components/schemas/ExampleData"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      deprecated: false
+    patch:
+      tags:
+        - ExampleData
+      description: |
+        Patch ExampleData.
+      operationId: modifyExampleDataById
+      parameters:
+        - name: x-correlation-id
+          in: header
+          required: true
+          schema:
+            type: string
+          example: example-corr-id
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: id-01
+        - name: status
+          in: query
+          required: true
+          schema:
+            $ref: "#/components/schemas/ExampleDataStatus"
+      responses:
+        200:
+          description: OK
+          content:
+            application/stream+json:
+              schema:
+                $ref: "#/components/schemas/ExampleData"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      deprecated: false
+    delete:
+      tags:
+        - ExampleData
+      description: |
+        Get ExampleData info by id.
+      operationId: deleteExampleDataById
+      parameters:
+        - name: x-correlation-id
+          in: header
+          required: true
+          schema:
+            type: string
+          example: example-corr-id
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: id-01
+      responses:
+        200:
+          description: OK
+          content:
+            application/stream+json:
+              schema:
+                $ref: "#/components/schemas/ExampleData"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        500:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      deprecated: false
+
+components:
+  schemas:
+    ExampleData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |
+            Examole data public identifier.
+        lastUpdatedTime:
+          type: string
+          format: date-time
+          description: |
+            Timestamp of the last modification date.
+        status:
+          $ref: "#/components/schemas/ExampleDataStatus"
+        connectedData:
+          description: |
+            Some other data.
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - status
+    ExampleDataStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - PAUSED
+        - INACTIVE
+      description: |
+        The status of the ExampleData.
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - timestamp
+      properties:
+        code:
+          type: string
+          description: A string coding the error type. This is given to caller so he can translate them if required.
+        timestamp:
+          type: string
+          format: date-time
+          description: Exact time of error
+        message:
+          type: string
+          description: A short localized string that describes the error.
+      title: Error
+      description: Default error message template

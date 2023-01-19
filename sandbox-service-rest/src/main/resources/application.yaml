@@ -1,0 +1,10 @@
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-stacktrace: never
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://${MONGODB_USER:mdbUser}:${MONGODB_PASSWORD:mdbPassword}@${MONGODB_HOST:localhost}:${MONGODB_PORT:27017}/${MONGODB_DATABASE:admin}
+      auto-index-creation: false
